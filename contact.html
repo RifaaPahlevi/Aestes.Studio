@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aestes - Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <h1 class="logo">A<span>ESTES</span></h1>
+      <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="catalog.html"><i class="fas fa-tshirt"></i> Catalog</a>
+        <a href="location.html"><i class="fas fa-map-marker-alt"></i> Location</a>
+        <a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="game.html"><i class="fas fa-gamepad"></i> Game</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="section container contact-section">
+      <h2><i class="fas fa-comments"></i> Connect with Aestes</h2>
+      <p><i class="fas fa-heart"></i> If you have any questions, feedback, or collaborations in mind, we'd love to hear from you.</p>
+      <form id="contact-form" class="contact-form">
+        <input type="text" id="fullName" name="fullName" placeholder="Your Full Name" required />
+        <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+        <div class="form-message" id="form-message"></div>
+        <button type="submit" class="btn-submit"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p><i class="far fa-copyright"></i> 2025 Aestes. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

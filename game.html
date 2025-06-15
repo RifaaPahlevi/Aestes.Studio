@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aestes - Tic Tac Toe Game</title>
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f0f0f;
+      color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #1a1a1a;
+      border-bottom: 2px solid #444;
+      padding: 1rem 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      flex-shrink: 0;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 900;
+      font-size: 1.9rem;
+      color: #f0f0f0;
+      user-select: none;
+    }
+    .logo span {
+      color: #886401;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      color: #ccc;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      user-select: none;
+    }
+    nav a:hover {
+      color: #886401;
+    }
+    nav a.active {
+      color: #886401;
+      border-bottom-color: #886401;
+    }
+    main {
+      flex: 1 0 auto;
+      padding: 3rem 0 4rem;
+      max-width: 960px;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+    h1 {
+      color: #ffffff;
+      font-weight: 900;
+      user-select: none;
+      margin-bottom: 15px;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 90px);
+      grid-template-rows: repeat(3, 120px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px auto 30px auto;
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(255, 221, 0, 0.1);
+      user-select: none;
+    }
+    .cell {
+      background: #121212;
+      border: 2px solid #886401;
+      border-radius: 12px;
+      font-size: 2.6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .cell:hover {
+      background-color: #232323;
+    }
+    #status {
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #ccc;
+      user-select: none;
+    }
+    .scoreboard {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 15px;
+      user-select: none;
+    }
+    #modeSelect {
+      font-size: 1rem;
+      padding: 5px 12px;
+      border: 2px solid #886401;
+      background-color: #1a1a1a;
+      color: #f0f0f0;
+      border-radius: 6px;
+      margin: 15px 0;
+      cursor: pointer;
+    }
+    #resetBtn {
+      background-color: #886401;
+      color: #0f0f0f;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 26px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      margin-bottom: 40px;
+    }
+    #resetBtn:hover {
+      background-color: #886401;
+    }
+    footer {
+      background-color: #1a1a1a;
+      color: #aaa;
+      font-weight: 700;
+      text-align: center;
+      padding: 1.2rem 0;
+      flex-shrink: 0;
+      width: 100%;
+      box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.4);
+    }
+    footer p {
+      margin: 0;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 class="logo">AEST<span>ES</span></h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="catalog.html">Catalog</a>
+        <a href="location.html">Location</a>
+        <a href="contact.html">Contact</a>
+        <a href="game.html" class="active">Game</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Tic Tac Toe</h1>
+
+    <div>
+      <label for="modeSelect">Mode:</label>
+      <select id="modeSelect">
+        <option value="2p">2 Pemain</option>
+        <option value="ai">Lawan AI</option>
+      </select>
+    </div>
+
+    <div class="scoreboard">
+      Skor X: <span id="scoreX">0</span> | Skor O: <span id="scoreO">0</span>
+    </div>
+
+    <div id="status">Player X's turn</div>
+    <div class="board" id="board"></div>
+    <button id="resetBtn">Reset Game</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Aestes. All rights reserved.</p>
+  </footer>
+
+  <!-- Script tetap sama -->
+  <script>
+    const board = document.getElementById("board");
+    const statusText = document.getElementById("status");
+    const resetBtn = document.getElementById("resetBtn");
+    const modeSelect = document.getElementById("modeSelect");
+    const scoreXEl = document.getElementById("scoreX");
+    const scoreOEl = document.getElementById("scoreO");
+
+    let currentPlayer = "X";
+    let gameBoard = Array(9).fill("");
+    let gameActive = true;
+    let mode = "2p"; 
+    let scoreX = 0;
+    let scoreO = 0;
+
+    let winConditions = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8],
+      [0, 3, 6], [1, 4, 7], [2, 5, 8],
+      [0, 4, 8], [2, 4, 6],
+    ];
+
+    modeSelect.addEventListener("change", () => {
+      mode = modeSelect.value;
+      resetGame(true);
+    });
+
+    function renderBoard() {
+      board.innerHTML = "";
+      gameBoard.forEach((val, i) => {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.dataset.index = i;
+        cell.textContent = val;
+        cell.addEventListener("click", handleClick);
+        board.appendChild(cell);
+      });
+    }
+
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+      if (gameBoard[index] || !gameActive) return;
+
+      gameBoard[index] = currentPlayer;
+      e.target.textContent = currentPlayer;
+      checkWinner();
+
+      if (gameActive) {
+        currentPlayer = currentPlayer === "X" ? "O" : "X";
+        statusText.textContent = `Player ${currentPlayer}'s turn`;
+        if (mode === "ai" && currentPlayer === "O") {
+          setTimeout(aiMove, 500);
+        }
+      }
+    }
+
+    function aiMove() {
+      let empty = gameBoard.map((val, i) => val === "" ? i : null).filter(v => v !== null);
+      if (empty.length === 0) return;
+      let move = empty[Math.floor(Math.random() * empty.length)];
+      gameBoard[move] = "O";
+      renderBoard();
+      checkWinner();
+      if (gameActive) {
+        currentPlayer = "X";
+        statusText.textContent = `Player ${currentPlayer}'s turn`;
+      }
+    }
+
+    function checkWinner() {
+      for (let [a, b, c] of winConditions) {
+        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+          gameActive = false;
+          statusText.textContent = `Player ${gameBoard[a]} wins!`;
+          updateScore(gameBoard[a]);
+          return;
+        }
+      }
+      if (!gameBoard.includes("")) {
+        gameActive = false;
+        statusText.textContent = "It's a draw!";
+      }
+    }
+
+    function updateScore(winner) {
+      if (winner === "X") {
+        scoreX++;
+        scoreXEl.textContent = scoreX;
+      } else if (winner === "O") {
+        scoreO++;
+        scoreOEl.textContent = scoreO;
+      }
+    }
+
+    function resetGame(resetScore = false) {
+      gameBoard = Array(9).fill("");
+      currentPlayer = "X";
+      gameActive = true;
+      statusText.textContent = `Player ${currentPlayer}'s turn`;
+      if (resetScore) {
+        scoreX = 0;
+        scoreO = 0;
+        scoreXEl.textContent = "0";
+        scoreOEl.textContent = "0";
+      }
+      renderBoard();
+    }
+
+    resetBtn.addEventListener("click", () => resetGame());
+    renderBoard();
+  </script>
+</body>
+</html>

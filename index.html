@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aestes - Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <h1 class="logo">A<span>ESTES</span></h1>
+      <nav>
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+        <a href="catalog.html"><i class="fas fa-tshirt"></i> Catalog</a>
+        <a href="location.html"><i class="fas fa-map-marker-alt"></i> Location</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="game.html"><i class="fas fa-gamepad"></i> Game</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+  <section class="section container hero">
+    <h2><i class="fas fa-star"></i> Welcome to Aestes <i class="fas fa-star"></i></h2>
+    <p>
+      <i class="fas fa-fire"></i> Aestes is a bold streetwear brand redefining modern casual. We're not just about clothes—we're about attitude, expression, and standing out unapologetically.
+    </p>
+    <p>
+      <i class="fas fa-tshirt"></i> From oversized tees and edgy hoodies to exclusive street staples, every piece is crafted with detail, comfort, and identity in mind.
+    </p>
+    <p>
+      Ready to elevate your style? 
+      <button id="btn-whatsapp-consult" class="btn-link"><i class="fab fa-whatsapp"></i> Chat with us on WhatsApp</button> to grab your next fit.
+    </p>
+  </section>
+
+  <section class="section container catalog-preview">
+    <h3><i class="fas fa-fire"></i> Latest Drops</h3>
+    <div class="catalog-grid" id="catalog-preview-grid">
+      <!-- Products will be loaded via JS or can be added manually -->
+    </div>
+    <div class="see-more-wrapper">
+      <a href="catalog.html" class="btn-see-more"><i class="fas fa-arrow-right"></i> Explore More</a>
+    </div>
+  </section>
+</main>
+
+
+  <!-- Footer -->
+  <footer>
+    <p><i class="far fa-copyright"></i> 2025 Aestes. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
